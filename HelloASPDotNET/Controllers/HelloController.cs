@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HelloASPDotNET.Controllers
 {
-    [Route("/helloworld/")]
     public class HelloController : Controller
     {
         public static string CreateMessage(string name, string language)
@@ -33,57 +32,22 @@ namespace HelloASPDotNET.Controllers
             return html;
         }
         
-       //GET: /<helloworld>/
+       //GET: /<hello>/
        [HttpGet]
         public IActionResult Index()
         {
-            string html = "<form method='post' action='/helloworld/welcome'>" +
-                "<input type = 'text' name = 'name' />" +
-                "<select name = 'language'>"+
-                    "<option value = ''> --Select a Language-- </option>" +
-                    "<option value = 'en'> English </option>" +
-                    "<option value = 'fr'> French </option>" +
-                    "<option value ='sp'> Spanish </option>" +
-                "</select>" +
-                "<input type = 'submit' value = 'Greet me!' />" +
-                "</form>";
-            return Content(html, "text/html");
+            return View();
         }
         
-        //GET: helloworld/welcome/name/
-        //POST: helloworld/welcome/
-        [HttpGet("welcome/{name?}")]
-        [HttpPost("welcome")]
+        //POST: hello
+        [HttpPost]
+        [Route("/hello")]
          public IActionResult Welcome(string name = "World" , string language = "en")
          {
             string html = CreateMessage(name, language);
              return Content(html, "text/html");
          }
 
-    //Exercise
-        //Get: /helloworld/language
-        [HttpGet("language")]
-        public IActionResult NameAndLanguage()
-        {
-            string html = "<form method='post' action='/helloworld/language_greeting'>" +
-                "<input type = 'text' name = 'name' />" +
-                "<select name = 'language'>" +
-                "   <option value = ''> --Select a Language-- </option>" +
-                "   <option value ='en'>English</option>" +
-                "   <option value ='sp'>Spanish</option>" +
-                "   <option value = 'fr'>French</option>" +
-                "</select>" +
-                "<input type = 'submit' value = 'Greet me!' />" +
-                "</form>";
-            return Content(html, "text/html");
-        }
-
-        //POST: /helloworld/language_greeting/
-       [HttpPost("language_greeting")]
-        public IActionResult WelcomeInLanguage(string name, string language)
-        {
-            return Content(CreateMessage(name, language), "text/html");
-        }
 
     }
 
