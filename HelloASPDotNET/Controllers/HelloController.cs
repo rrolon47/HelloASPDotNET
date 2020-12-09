@@ -10,26 +10,26 @@ namespace HelloASPDotNET.Controllers
     {
         public static string CreateMessage(string name, string language)
         {
-            string html = "";
+            string msg = "";
 
             if (String.IsNullOrEmpty(language) && String.IsNullOrEmpty(name))
             {
-                html = $"<h1>Welcome to my app, World!</h1>";
+                msg = $"Welcome to my app, World!";
             }
             else if (language.Equals("en"))
             {
-                html = $"<h1>Welcome to my app, {name}!</h1>";
+                msg = $"Welcome to my app, {name}!";
             }
             else if (language.Equals("fr"))
             {
-               html = $"<h1>Bonjour, {name}!</h1>";
+               msg = $"Bonjour, {name}!";
             }
             else if (language.Equals("sp"))
             {
-                html = $"<h1>&#161Buenvinidos a mi app, {name}!</h1>";
+                msg = $"¡Buenvinidos a mi app, {name}!";
 
             }
-            return html;
+            return msg;
         }
         
        //GET: /<hello>/
@@ -44,8 +44,7 @@ namespace HelloASPDotNET.Controllers
         [Route("/hello")]
          public IActionResult Welcome(string name = "World" , string language = "en")
          {
-            ViewBag.person = name;
-            //string html = CreateMessage(name, language);
+            ViewBag.message = CreateMessage(name, language);
             return View();
         }
 
