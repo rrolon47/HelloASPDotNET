@@ -44,9 +44,10 @@ namespace HelloASPDotNET.Controllers
         [Route("/hello")]
          public IActionResult Welcome(string name = "World" , string language = "en")
          {
-            string html = CreateMessage(name, language);
-             return Content(html, "text/html");
-         }
+            ViewBag.person = name;
+            //string html = CreateMessage(name, language);
+            return View();
+        }
 
 
     }
